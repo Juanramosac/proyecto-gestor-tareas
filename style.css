@@ -1,0 +1,21 @@
+#tablero {
+    display: flex;
+}
+
+.columna{
+    background-color : rgb(161, 175, 204);
+    flex: 1;
+}
+
+.tarjeta-tarea {
+    background-color : rgb(47, 47, 56);
+    color : white;
+    padding : 10px;
+    margin-bottom : 15px;
+    border-radius : 8px;
+}
+
+.prioridad-alta {
+    color: red;
+    font-weight: bold;
+}
