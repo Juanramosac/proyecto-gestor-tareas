@@ -1,23 +1,46 @@
 const columnaPendientes = document.getElementById("lista-tareas");
+const inputTarea = document.getElementById("input-tarea");
+const botonAgregar = document.getElementById("btn-agregar");
 
-function agregarNuevaTarea() {
+function agregarNuevaTarea(textoDeLaTarea) {
     
-    const nuevaTarjeta = document.createElement("div");
+const nuevaTarjeta = document.createElement("div");
+nuevaTarjeta.classList.add("tarjeta-tarea");
     
-
-    nuevaTarjeta.classList.add("tarjeta-tarea");
-    
-    // PASO C: Inyectar el HTML por dentro (Usamos backticks ` ` para poder escribir en varias líneas)
-    // Nota: Aquí pegarás exactamente el mismo HTML interno que hiciste en tu Micro-Reto anterior
     nuevaTarjeta.innerHTML = `
-        <h3>Aprender el DOM</h3>
+        <h3>${textoDeLaTarea}</h3>
         <p>Prioridad: <span class="prioridad-alta">ALTA</span></p>
         <p><strong>Responsable:</strong> Juan Felipe</p>
         <p><small>Creado hoy</small></p>
+        <button class="btn-eliminar">Eliminar 🗑️</button>
     `;
+
+    const botonEliminar = nuevaTarjeta.querySelector(".btn-eliminar");
+    botonEliminar.addEventListener("click", function() {
+    nuevaTarjeta.remove();
+    });
     
-    // PASO D: Enganchar la tarjeta recién creada a nuestra columna en la pantalla
     columnaPendientes.appendChild(nuevaTarjeta);
 }
 
-agregarNuevaTarea();
+botonAgregar.addEventListener("click", function() {
+    const textoUsuario = inputTarea.value;
+    if (textoUsuario === "") {
+        alert("¡Por favor, escribe una tarea antes de agregarla!");
+        return;
+    }
+    
+    agregarNuevaTarea(textoUsuario);
+    inputTarea.value = "";
+});
+
+inputTarea.addEventListener("keydown", function(evento) {
+    console.log("Acabas de presionar la tecla: " + evento.key);
+    if (evento.key === "Enter") {
+        evento.preventDefault();
+        botonAgregar.click();
+    }
+});
+
+
+
